@@ -1,0 +1,13 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+
+development:
+  <<: *default
+  database: dev_store_db
+  url: <%= ENV['DEVELOPMENT_DATABASE_URL'] %>
+
+production:
+  <<: *default
+  database: store_db
+  url: <%= ENV['DATABASE_URL'] %>
