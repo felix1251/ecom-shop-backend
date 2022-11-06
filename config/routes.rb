@@ -1,6 +1,16 @@
+require 'sidekiq/web'
+# Configure Sidekiq-specific session middleware
+Sidekiq::Web.use ActionDispatch::Cookies
+Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: '_interslice_session'
+
+Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+  username == ENV['SIDEKIQ_USERNAME'] && password == ENV['SIDEKIQ_PASSWORD']
+end
+
 Rails.application.routes.draw do
-  # devise_for :users
+  mount Sidekiq::Web => '/sidekiq'
   mount_devise_token_auth_for 'User', at: 'api/v1/auth', skip: [:omniauth_callbacks, :sessions, :registration, :password, :validations, :token_validations]
+  
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       #auth controllers
