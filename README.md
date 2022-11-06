@@ -10,8 +10,7 @@ rails db:migrate
 rails s
 
 
-```Open for contributors
-Contact me
-
+Open for contributors
+CONTACT ME
 email: domhack123@gmail.com
 
