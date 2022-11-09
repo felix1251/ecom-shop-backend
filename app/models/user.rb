@@ -3,7 +3,7 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable, :confirmable,
           :omniauthable, omniauth_providers: %i[google_oauth2] 
 
-  include  DeviseTokenAuth::Concerns::User 
+  include DeviseTokenAuth::Concerns::User 
 
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },
