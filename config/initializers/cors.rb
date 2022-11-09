@@ -21,10 +21,11 @@
 # I added this for cors to be able to accept request from client. for now it accepts from all origins
 Rails.application.config.middleware.insert_before 0, Rack::Cors  do
   allow do
-    origins 'http://localhost:3000'
+    origins 'http://localhost:8080'
     resource '*',
             headers: :any,
             credentials: true,
+            # expose: ['access-token', 'token', 'expiry', 'token-type', 'uid', 'client'],
             methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end

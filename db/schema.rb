@@ -12,15 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_05_26_075719) do
 
-  create_table "profile_images", force: :cascade do |t|
-    t.string "img_url"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_profile_images_on_user_id"
-  end
-
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
