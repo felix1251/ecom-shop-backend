@@ -11,9 +11,9 @@ class Api::V1::SocialAuthController < ApplicationController
     @user = User.signin_or_create_from_google(response.parsed_response)
     if @user.persisted?
       sign_in(@user)
-      render json: { status: 'SUCCESS', message: "You are successfully logged in through Google", is_user_signed_in: user_signed_in? }, status: :created
+      render json: @user
     else
-      render json: { status: 'FAILED', message: "There was a problem signing you in through Google",  data: @user.errors }, status: :unprocessable_entity
+      render json: {error: "can't sign in, something is wrong"}
     end
   end
 
@@ -29,4 +29,12 @@ class Api::V1::SocialAuthController < ApplicationController
       render json: { error: "Missing Params" } , status: :unprocessable_entity
     end
   end
+
+  # def set_headers(tokens)
+  #   response.headers['access-token'] = tokens['access-token']
+  #   response.headers['client'] = tokens['client']
+  #   response.headers['expiry'] = tokens['expiry']
+  #   response.headers['token-type'] = tokens['token-type']
+  #   response.headers['uid'] = tokens['uid']
+  # end
 end
