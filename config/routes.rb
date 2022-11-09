@@ -15,11 +15,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       #auth controllers
       post 'google_auth/callback', to: 'social_auth#authenticate_by_google'
-      get 'me', controller: :infos, action: :me
+      get 'me', controller: :me, action: :me
       delete "logout", to: 'social_auth#log_out'
       #crud controllers
       resources :users
-      resources :profile_images
     end
   end
 end
